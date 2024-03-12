@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css" />
+    <title>EMI-Calculator</title>
+    </head>
+    <body>
+    
+     <div class="header">
+            <h1>EMI-Calculator</h1>
+    </div>
+    <div class="MainContainer">
+        <div class="Container1">
+          <form id="emi-form">
+            <div class="loan-amount">
+              <label class="loan-amt"></label>
+              <input
+                type="number"
+                id="amount"
+                class="AmountInput"
+                placeholder="Enter your loan amount" />
+            </div>
+            <br>
+            <div class="rate-interst">
+              <label class="interst-info"></label>
+              <input
+                type="number"
+                id="Interest"
+                class="InterestInput"
+                placeholder="Enter your interest rate" />
+            </div>
+            <br>
+            <div class="months-interest">
+                <label class="months-info"></label>
+                <input
+                  type="number"
+                  id="time"
+                  class="MonthsInput"
+                  placeholder="Enter your months"
+                 />
+              </div>
+              
+              <button id="btn" class="bn632-hover bn24">Calculate</button>
+            </form>
+
+    </div>
+    
+
+    <div class="Container3">
+        <p id="result">Your EMI is :<span id="emi"></span></p>
+    </div>
+
+    </div>
+
+    <script>
+              var form = document.getElementById("emi-form");
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+      });
+
+      var button = document.getElementById("btn");
+      button.addEventListener("click", calculateEMI);
+
+      function calculateEMI() {
+        var amount = document.getElementById("amount").value;
+        var interest = document.getElementById("Interest").value;
+        var time = document.getElementById("time").value;
+
+        if (amount === "" || interest === "" || time === "") {
+          alert("Please Enter all values.");
+          return;
+        }
+
+        var monthlyInterest = interest / (12 * 100);
+
+        var emi =
+          (amount * monthlyInterest * Math.pow(1 + monthlyInterest, time)) /
+          (Math.pow(1 + monthlyInterest, time) - 1);
+        document.getElementById("emi").innerText = "$" + emi.toFixed(2);
+      }
+
+
+    </script>
+</body>
+</html>  
